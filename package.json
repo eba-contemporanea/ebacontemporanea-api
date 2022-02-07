@@ -1,0 +1,28 @@
+{
+  "name": "ebacontemporanea",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node index.js",
+    "build": "npm build",
+    "test": "npm test",
+    "eject": "npm eject"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eba-contemporanea/ebacontemporanea-api.git"
+  },
+  "author": "EBAContemporanea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eba-contemporanea/ebacontemporanea-api/issues"
+  },
+  "homepage": "https://github.com/eba-contemporanea/ebacontemporanea-api#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0",
+    "swagger-ui-express": "^4.3.0"
+  }
+}

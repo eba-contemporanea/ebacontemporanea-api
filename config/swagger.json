@@ -1,0 +1,19 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "design-api",
+        "description": "Exercícios práticos das aulas de Design de API",
+        "version": "0.1.0"
+    },
+    "externalDocs": {
+        "description": "Ver no Github",
+        "url": "https://github.com/b2wads/design-api"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Local"
+        }
+    ],
+    "paths": {}
+}

@@ -1,0 +1,81 @@
+{
+    "artistas": [{
+        "id": 1,
+        "nome": "Alexandre Vogler",
+        "cover": "img/1.png"
+    }],
+    "artista": [{
+        "id": 1,
+        "nome": "Alexandre o Grandessíssimo Bostão",
+        "fotoPerfil": "img1.png",
+	    "fotoBanner": "img2.png",
+        "localNascimento": "RJ",
+        "localAtual": "RJ",
+        "estudos": [{
+            "id": 1,
+            "tipo": "Graduação",
+            "area": "Pintura",
+            "anoInicio": 2010,
+            "anoFim": 2015
+        }],
+        "profissao": "Professor do Instituto de Artes da UERJ",
+        "biografia": "Xandao era brabo desde q nasceu porem virou pintor",
+        "links": [{
+            "id": 1,
+            "nome": "Currículo Lattes",
+            "url": "www.lates.com/xandin"
+        }],
+        "obras": [{
+            "id": 1,
+            "img": "img/obraAle1",
+            "nome": "obra Ale 1"
+        }],
+        "outrosTextos": [{
+            "id": 1,
+            "url": "google.com",
+            "titulo": "BOSTAO, Alexandre o Grandessisimo. 2018. Página do Google Ponto Com"
+        }],
+        "entrevistas": [{
+            "id": 1,
+            "nome": "Xande Vogle",
+            "url": "youtube.com/xande"
+        }],
+        "galeriasComerciais": [{
+            "id": 1,
+            "nome": "Amota Schartz",
+            "url": "www.lates.com/xandin"
+        }],
+        "eventos": [{
+            "id": 1,
+            "nome": "Atrocidades Maravilhosas",
+            "url": "www.lates.com/xandin"
+        }],
+        "premios": [{
+            "id": 1,
+            "nome": "Sexto Premio Flâboiã",
+            "url": "www.lates.com/xandin"
+        }]
+    },
+    {
+        "id": 2,
+        "nome": "outro"
+    }],
+    "home": {
+        "carrossel": [{
+            "img": "img/carrosel1",
+            "nome": "carrosel1",
+            "id": 1
+        }]
+    },
+    "pesquisadores": [{
+        "id": 1,
+        "cargo": "coordenador",
+        "nome": "Ivair Reinaldinho",
+        "descricao": "Doutor ui ui doutorado",
+        "links": [{
+            "url": "www.lates.com/reinaldinho",
+            "nome": "lates",
+            "id": 1
+        }]
+    }]
+}
