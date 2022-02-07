@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "scripts": {
     "start": "node index.js",
-    "build": "npm run build",
     "test": "npm test",
     "eject": "npm eject"
   },
