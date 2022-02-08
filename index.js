@@ -5,6 +5,7 @@ const artistaRoute = require('./routes/artistaRoute');
 const cors = require('cors');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig))
 
@@ -20,6 +21,6 @@ app.get('/pesquisadores', (req, res) => {
 
 app.use(cors());
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000')
+app.listen(port, () => {
+    console.log(`Server running on ${port}`)
 })

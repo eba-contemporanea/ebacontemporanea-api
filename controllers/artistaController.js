@@ -1,5 +1,11 @@
 const database = require('../database.json');
 
+const getAllArtistas = (req, res) => {
+    const artistas = database.artista;
+
+    res.send(artistas);
+}
+
 const findArtista = (req, res) => {
     const artistaId = req.params.id;
     const [artista] = database.artista.filter(a => a.id == artistaId);
@@ -25,6 +31,7 @@ const deleteArtista = (req, res) => {
 }
 
 module.exports = {
+    getAllArtistas,
     findArtista,
     addArtista,
     editArtista,

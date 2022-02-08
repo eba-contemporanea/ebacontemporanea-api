@@ -1,7 +1,9 @@
 const express = require('express');
-const { addArtista, findArtista, editArtista, deleteArtista } = require('../controllers/artistaController');
+const { addArtista, findArtista, editArtista, deleteArtista, getAllArtistas } = require('../controllers/artistaController');
 
 const router = express.Router();
+
+router.get('/', getAllArtistas);
 
 router.get('/:id', findArtista);
 
