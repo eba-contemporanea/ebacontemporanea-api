@@ -1,56 +1,57 @@
-const { object, string, number, array } = require("joi");
+const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 
-const schema = object({
-    "id": number().required(),
-    "nome": string().required(),
-    "fotoPerfil": string(),
-    "fotoBanner": string(),
-    "localNascimento": string(),
-    "localAtual": string(),
-    "estudos": array([{
-        "id": number().required(),
-        "tipo": string().required(),
-        "area": string().required(),
-        "anoInicio": number(),
-        "anoFim": number()
-    }]),
-    "profissao": string(),
-    "biografia": string(),
-    "links": array([{
-        "id": number().required(),
-        "nome": string().required(),
-        "url": string().required(),
-    }]),
-    "obras": array([{
-        "id": number().required(),
-        "img": string().required(),
-        "nome": string().required(),
-    }]),
-    "outrosTextos": array([{
-        "id": number().required(),
-        "url": string().required(),
-        "titulo": string().required(),
-    }]),
-    "entrevistas": array([{
-        "id": number().required(),
-        "nome": string().required(),
-        "url": string().required(),
-    }]),
-    "galeriasComerciais": array([{
-        "id": number().required(),
-        "nome": string().required(),
-        "url": string().required(),
-    }]),
-    "eventos": array([{
-        "id": number().required(),
-        "nome": string().required(),
-        "url": string().required(),
-    }]),
-    "premios": array([{
-        "id": number().required(),
-        "nome": string().required(),
-        "url": string().required(),
-    }])
+const schema = new mongoose.Schema({
+    id: ObjectId,
+    nome: String,
+    fotoPerfil: String,
+    fotoBanner: String,
+    localNascimento: String,
+    localAtual: String,
+    estudos: [{
+        id: ObjectId,
+        nivel: String,
+        area: String,
+        anoInicio: Number,
+        anoFim: Number,
+    }],
+    profissao: String,
+    biografia: String,
+    links: [{
+        id: ObjectId,
+        nome: String,
+        url: String,
+    }],
+    obras: [{
+        id: ObjectId,
+        img: String,
+        nome: String,
+    }],
+    outrosTextos: [{
+        id: ObjectId,
+        url: String,
+        titulo: String,
+    }],
+    entrevistas: [{
+        id: ObjectId,
+        nome: String,
+        url: String,
+    }],
+    galeriasComerciais: [{
+        id: ObjectId,
+        nome: String,
+        url: String,
+    }],
+    eventos: [{
+        id: ObjectId,
+        nome: String,
+        url: String,
+    }],
+    premios: [{
+        id: ObjectId,
+        nome: String,
+        url: String,
+    }]
 });
 
-module.exports = schema;
+module.exports = mongoose.model('Artista', schema);

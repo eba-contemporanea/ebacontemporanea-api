@@ -1,25 +1,32 @@
-const database = require('../database.json');
+const Artista = require('../models/artista');
 
-const getAllArtistas = (req, res) => {
-    const artistas = database.artista;
-
-    res.send(artistas);
+const findArtista = async(req, res) => {
+    let artistaId = req.params.id;
+    console.log("req: ", artistaId);
+    try {
+        // nao retorna obj correto ?
+        const artista = await Artista.findOne({ publicId: Number(artistaId) });
+        console.log("get: ", artista.publicId);
+        res.send(
+            artista == [] 
+            ? (404, { msg: 'Artista não encontrado.'}) 
+            : artista
+        );
+    } catch(err) {
+        console.error(`Houve um erro ao buscar artista: ${err}`)
+        res.send(404, { msg: err });
+    }
 }
 
-const findArtista = (req, res) => {
-    const artistaId = req.params.id;
-    const [artista] = database.artista.filter(a => a.id == artistaId);
+const addArtista = async(req, res) => {
+    const newArtista = new Artista(req.body);
 
-    res.send(
-        artista === undefined 
-        ? (404, { msg: 'Artista não encontrado.'}) 
-        : artista
-    );
-}
-
-const addArtista = (req, res, next) => {
-    const body = req;
-    res.send({ body: body[0] });
+    await newArtista.save().then(res => {
+        res.send(200, { body: body[0] });
+    }).catch(err => {
+        console.error(`Houve um erro ao tentar adicionar artista: ${err}`)
+        res.send(404, { msg: err });
+    });
 }
 
 const editArtista = (req, res) => {
@@ -31,7 +38,6 @@ const deleteArtista = (req, res) => {
 }
 
 module.exports = {
-    getAllArtistas,
     findArtista,
     addArtista,
     editArtista,

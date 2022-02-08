@@ -1,7 +1,10 @@
-const { object, number, string } = require('joi');
+const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 
-export default object({
-    id: number().required(),
-    nome: string().required(),
-    cover: string().required()
+const schema = new mongoose.Schema({
+    _id: ObjectId,
+    nome: String,
+    cover: File
 })
+
+module.exports = mongoose.model('Artistas', schema);
