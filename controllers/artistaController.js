@@ -1,13 +1,11 @@
-const { ObjectId } = require('mongodb');
 const Artista = require('../models/artista');
 
 const findArtista = async(req, res) => {
     let artistaId = req.params.id;
-    console.log("req: ", artistaId);
+
     try {
-        // nao retorna obj correto ?
         let artista = await Artista.findOne({ publicId: Number(artistaId) });
-        console.log("get: ", artista.publicId);
+        
         if(artista == {}) {
             res.status(404).send({ msg: 'Artista não encontrado.'})
         } else {
