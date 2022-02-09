@@ -2,7 +2,7 @@ const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    id: ObjectId,
+    _id: ObjectId,
     nome: String,
     fotoPerfil: String,
     fotoBanner: String,
@@ -51,7 +51,8 @@ const schema = new mongoose.Schema({
         id: ObjectId,
         nome: String,
         url: String,
-    }]
+    }],
+    publicId: Number
 });
 
 module.exports = mongoose.model('Artista', schema);
