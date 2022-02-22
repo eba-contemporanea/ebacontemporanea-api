@@ -19,7 +19,7 @@ const findArtista = async(req, res) => {
 
 const getAllArtistas = async(req, res) => {
     try {
-        let artistas = await Artistas.find();
+        let artistas = await Artista.find();
         
         if(artistas == []) {
             res.status(404).send({ msg: 'Nenhum artista encontrado.'})
