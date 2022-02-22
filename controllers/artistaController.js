@@ -1,5 +1,4 @@
 const Artista = require('../models/artista');
-const Artistas = require('../models/artistas');
 
 const findArtista = async(req, res) => {
     let artistaId = req.params.id;
