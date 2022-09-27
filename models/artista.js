@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
     nome: String,
     fotoPerfil: String,
     fotoBanner: String,
+    fotoCard: String,
     localNascimento: String,
     localAtual: String,
     estudos: [{
@@ -16,7 +17,10 @@ const schema = new mongoose.Schema({
         anoFim: Number,
     }],
     profissao: String,
-    biografia: String,
+    biografia: {
+        texto: String,
+        autor: String,
+    },
     links: [{
         id: ObjectId,
         nome: String,
