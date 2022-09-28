@@ -18,17 +18,23 @@ const findArtista = async(req, res) => {
 }
 
 const getAllArtistas = async(req, res) => {
-    const { page = 1, limit = 18 } = req.query;
+    const { page = 1, limit = 12 } = req.query;
 
     try {
-        let artistas = await Artista.find().limit(limit * 1).skip((page - 1) * limit).exec();
+        let artistas = await Artista.find().sort({ nome: 1 }).limit(limit * 1).skip((page - 1) * limit).exec();
 
-        let orderedArtists = artistas.sort((a, b) => a.nome.localeCompare(b.nome, 'en'));
+        // let orderedArtists = artistas.sort((a, b) => a.nome.localeCompare(b.nome, 'en'));
+
+        let estimatedCount = await Artista.countDocuments();
         
         if(artistas == []) {
             res.status(404).send({ msg: 'Nenhum artista encontrado.'})
         } else {
-            res.status(200).send(orderedArtists);
+            res.status(200).send({ 
+                count: estimatedCount,
+                totalPages: Math.round(estimatedCount / 12),
+                artists: artistas
+            });
         }
     } catch(err) {
         console.error(`Houve um erro ao buscar artista: ${err}`)
