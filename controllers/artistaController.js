@@ -18,13 +18,17 @@ const findArtista = async(req, res) => {
 }
 
 const getAllArtistas = async(req, res) => {
+    const { page = 1, limit = 18 } = req.query;
+
     try {
-        let artistas = await Artista.find();
+        let artistas = await Artista.find().limit(limit * 1).skip((page - 1) * limit).exec();
+
+        let orderedArtists = artistas.sort((a, b) => a.nome.localeCompare(b.nome, 'en'));
         
         if(artistas == []) {
             res.status(404).send({ msg: 'Nenhum artista encontrado.'})
         } else {
-            res.status(200).send(artistas);
+            res.status(200).send(orderedArtists);
         }
     } catch(err) {
         console.error(`Houve um erro ao buscar artista: ${err}`)
