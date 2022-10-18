@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "design-api",
-        "description": "Exercícios práticos das aulas de Design de API",
+        "title": "EBA Contemporânea API",
+        "description": "API containing all information from research on Brazillian artists",
         "version": "0.1.0"
     },
     "externalDocs": {
@@ -11,9 +11,96 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3000",
+            "url": "http://localhost:4000",
             "description": "Local"
+        },
+        {
+            "url": "https://ebacontemporanea.herokuapp.com",
+            "description": "Produção"
         }
     ],
-    "paths": {}
+    "paths": {
+        "/artistas": {
+            "get": {
+                "description": "Get all artists",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/artistas/:publicId": {
+            "get": {
+                "description": "Get artist by publicId",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "description": "Artist's public ID",
+                        "required": true,
+                        "schema": {
+                            "publicId": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update artist information",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "description": "Artist's public ID",
+                        "required": true,
+                        "schema": {
+                            "publicId": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista atualizado!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -3,13 +3,13 @@ const {
     addArtista, 
     findArtista, 
     editArtista, 
-    deleteArtista, 
-    getAllArtistas 
+    deleteArtista,
+    getArtists
 } = require('../controllers/artistaController');
 
 const router = express.Router();
 
-router.get('/', getAllArtistas);
+router.get('/', getArtists);
 
 router.get('/:id', findArtista);
 
