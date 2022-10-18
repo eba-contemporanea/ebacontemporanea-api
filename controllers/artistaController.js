@@ -15,7 +15,7 @@ const findArtista = async(req, res) => {
                 artista,
                 navigation: {
                     previous: previousArtist ? previousArtist.publicId : 1,
-                    next: nextArtist ? nextArtist.publicId : artistaId + 1,
+                    next: nextArtist ? nextArtist.publicId : artistaId + 2,
                 }
             });
         } else {
