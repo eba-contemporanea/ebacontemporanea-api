@@ -7,8 +7,8 @@ const findArtista = async(req, res) => {
     try {
         let artista = await Artista.findOne({ publicId: artistaId });
         
-        const [previousArtist] = await Artista.find({publicId: {$gt: artistaId}}).sort({ name: 1 }).limit(1);
-        const [nextArtist] = await Artista.find({publicId: {$lt: artistaId}}).sort({ name: -1 }).limit(1);
+        const [nextArtist] = await Artista.find({publicId: {$gt: artistaId}}).sort({ name: 1 }).limit(1);
+        const [previousArtist] = await Artista.find({publicId: {$lt: artistaId}}).sort({ name: -1 }).limit(1);
 
         if(artista) {
             res.status(200).send({
