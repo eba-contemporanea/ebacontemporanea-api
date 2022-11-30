@@ -13,11 +13,17 @@ const port = process.env.PORT || 4000;
 mongoose.connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true });
 let connection = mongoose.connection;
 
-connection.on('error', (error) => { console.error(`Houve um erro ao carregar o banco de dados: ${error}`) });
+connection.on('error', (error) => { 
+    console.error(`Houve um erro ao carregar o banco de dados: ${error}`);
+});
 
 connection.once('open', () => { console.log('Banco de dados conectado com sucesso!') });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
+app.options('*', cors());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 
