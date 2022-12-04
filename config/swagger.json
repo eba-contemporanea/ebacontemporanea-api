@@ -3,11 +3,11 @@
     "info": {
         "title": "EBA Contemporânea API",
         "description": "API containing all information from research on Brazillian artists",
-        "version": "0.1.0"
+        "version": "1.0.0"
     },
     "externalDocs": {
         "description": "Ver no Github",
-        "url": "https://github.com/b2wads/design-api"
+        "url": "https://github.com/eba-contemporanea/ebacontemporanea-api"
     },
     "servers": [
         {
@@ -15,12 +15,12 @@
             "description": "Local"
         },
         {
-            "url": "https://ebacontemporanea.herokuapp.com",
+            "url": "https://ebac.fly.dev",
             "description": "Produção"
         }
     ],
     "paths": {
-        "/artistas": {
+        "/artista": {
             "get": {
                 "description": "Get all artists",
                 "responses": {
@@ -32,9 +32,41 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Add artist",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": ""
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista adicionado!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
-        "/artistas/:publicId": {
+        "/artista/{publicId}": {
             "get": {
                 "description": "Get artist by publicId",
                 "parameters": [
@@ -86,6 +118,40 @@
                             "application/json": {
                                 "schema": {
                                     "msg": "Artista atualizado!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete artist",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "description": "Artist's public ID",
+                        "required": true,
+                        "schema": {
+                            "publicId": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Artista deletado!"
                                 }
                             }
                         }

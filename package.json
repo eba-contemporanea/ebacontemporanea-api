@@ -4,7 +4,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "npm test",
-    "eject": "npm eject"
+    "eject": "npm eject",
+    "deploy": "flyctl deploy"
   },
   "main": "index.js",
   "repository": {
