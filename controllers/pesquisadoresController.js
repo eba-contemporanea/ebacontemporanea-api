@@ -8,11 +8,13 @@ const getPesquisadores = async(req, res) => {
         const coordenador = pesquisadores.filter(p => p.cargo == 'Coordenador');
         const bolsistasAtuais = pesquisadores.filter(p => p.cargo == 'Bolsista Atual');
         const bolsistasAnteriores = pesquisadores.filter(p => p.cargo == 'Bolsista Anterior');
+        const voluntarios = pesquisadores.filter(p => p.cargo == 'Voluntário');
 
         const orderedPesquisadores = {
             coordenador,
             bolsistasAtuais,
-            bolsistasAnteriores
+            bolsistasAnteriores,
+            voluntarios
         }
 
         res.status(200).send(orderedPesquisadores);

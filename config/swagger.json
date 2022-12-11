@@ -167,6 +167,122 @@
                     }
                 }
             }
+        },
+        "/pesquisadores": {
+            "get": {
+                "description": "Get all pesquisadores",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add pesquisador",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": ""
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Pesquisador adicionado!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Pesquisador não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pesquisadores/{publicId}": {
+            "put": {
+                "description": "Update pesquisador information",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "description": "Pesquisador's public ID",
+                        "required": true,
+                        "schema": {
+                            "publicId": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Pesquisador atualizado!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Pesquisador não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete pesquisador",
+                "parameters": [
+                    {
+                        "name": "publicId",
+                        "in": "path",
+                        "description": "Pesquisador's public ID",
+                        "required": true,
+                        "schema": {
+                            "publicId": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Pesquisador deletado!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "msg": "Pesquisador não encontrado."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
