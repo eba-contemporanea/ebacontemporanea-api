@@ -1,13 +1,21 @@
-const { object, number, string, array } = require('joi');
+const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 
-export default object([{
-    "id": number(),
-    "cargo": string(),
-    "nome": string(),
-    "descricao": string(),
-    "links": array([{
-        "url": string(),
-        "nome": string(),
-        "id": number()
-    }])
-}])
+const schema = new mongoose.Schema({
+    _id: ObjectId,
+    foto: String,
+    cargo: {
+        type: String,
+        enum: ['Bolsista Atual', 'Bolsista Anterior', 'Coordenador', 'Voluntário'],
+        default: 'Bolsista Atual'
+    },
+    nome: String,
+    descricao: String,
+    links: [{
+        url: String,
+        nome: String,
+    }],
+    publicId: Number
+});
+
+module.exports = mongoose.model('Pesquisadores', schema);

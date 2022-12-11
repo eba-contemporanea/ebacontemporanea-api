@@ -101,7 +101,7 @@ const editArtista = async (req, res) => {
             res.status(500).send({ msg: err });
         });
     } else {
-        res.status(402).send({ msg: "ID parameter is missing." })
+        res.status(401).send({ msg: "ID parameter is missing." })
     }
 
 }
@@ -116,7 +116,7 @@ const deleteArtista = async (req, res) => {
             res.status(500).send({ msg: err });
         });
     } else {
-        res.status(402).send({ msg: "ID parameter is missing." })
+        res.status(401).send({ msg: "ID parameter is missing." })
     }
 
 }

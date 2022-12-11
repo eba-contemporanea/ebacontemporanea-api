@@ -13,7 +13,7 @@ router.get('/', getArtists);
 
 router.get('/:id', findArtista);
 
-router.post('/', addArtista);
+router.post('/new', addArtista);
 
 router.put('/:id', editArtista);
 
