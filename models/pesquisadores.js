@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
     foto: String,
     cargo: {
         type: String,
-        enum: ['Bolsista Atual', 'Bolsista Anterior', 'Coordenador', 'Voluntário'],
+        enum: ['Bolsista Atual', 'Bolsista Anterior', 'Coordenador', 'Voluntário', 'Participação'],
         default: 'Bolsista Atual'
     },
     nome: String,

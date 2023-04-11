@@ -56,7 +56,8 @@ const schema = new mongoose.Schema({
         nome: String,
         url: String,
     }],
-    publicId: Number
+    publicId: Number,
+    active: Boolean
 });
 
 module.exports = mongoose.model('Artista', schema);
