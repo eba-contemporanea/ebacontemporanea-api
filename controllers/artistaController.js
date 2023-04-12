@@ -44,11 +44,13 @@ const getArtists = async (req, res) => {
         allArtistas = await Artista
             .find()
             .sort({ nome: 1 })
+            .collation({ locale: "pt" })
             .exec();
 
         paginatedArtistas = await Artista
             .find(searchQuery)
             .sort({ nome: 1 })
+            .collation({ locale: "pt" })
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
