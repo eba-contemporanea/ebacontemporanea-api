@@ -63,7 +63,7 @@ const getArtists = async (req, res) => {
         } else {
             res.status(200).send({
                 count: estimatedCount,
-                totalPages: Math.round(estimatedCount / 12),
+                totalPages: Math.ceil(estimatedCount / limit),
                 availableLetters: getAvailableLetters(allArtistas),
                 artists: getAll ? allArtistas : paginatedArtistas,
                 allIds: publicIds,

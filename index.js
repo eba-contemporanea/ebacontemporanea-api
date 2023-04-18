@@ -8,6 +8,7 @@ const { mongourl } = require('./config/mongodb');
 
 const artistaRoute = require('./routes/artistaRoute');
 const pesquisadoresRoute = require('./routes/pesquisadoresRoute');
+const coletivosRoute = require('./routes/coletivosRoute');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -31,6 +32,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 
 app.use('/artista', artistaRoute);
 app.use('/pesquisadores', pesquisadoresRoute);
+app.use('/coletivos', coletivosRoute);
 
 app.listen(port, () => {
     console.log(`Server running on ${port}`)
