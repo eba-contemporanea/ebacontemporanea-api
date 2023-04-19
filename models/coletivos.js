@@ -27,6 +27,7 @@ const schema = new mongoose.Schema({
         nome: String,
     },
     publicId: Number,
+    active: Boolean
 });
 
 

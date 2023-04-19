@@ -36,15 +36,22 @@ const findArtista = async (req, res) => {
 
 const getArtists = async (req, res) => {
     const { page, limit = 12, search = '', getAll = false } = req.query;
-    const searchQuery = search !== '' ? { nome: { $regex: '^' + search, $options: 'i' } } : {};
+    const searchRegex = new RegExp(`^${search}`)
+    const searchQuery = search !== '' ? { nome: { $regex: searchRegex, $options: "iu" } } : {};
 
-    let allArtistas, paginatedArtistas, estimatedCount, publicIds;
+    let allArtistas, allPaginatedArtists, paginatedArtistas, estimatedCount, publicIds;
 
     try {
         allArtistas = await Artista
             .find()
             .sort({ nome: 1 })
             .collation({ locale: "pt" })
+            .exec();
+            
+        allPaginatedArtists = await Artista
+            .find(searchQuery)
+            .sort({ nome: 1 })
+            .collation({ locale: 'pt' })
             .exec();
 
         paginatedArtistas = await Artista
@@ -55,7 +62,7 @@ const getArtists = async (req, res) => {
             .skip((page - 1) * limit)
             .exec();
 
-        estimatedCount = search !== '' ? paginatedArtistas.length : await Artista.countDocuments();
+        estimatedCount = search !== '' ? allPaginatedArtists.length : await Artista.countDocuments();
         publicIds = allArtistas.map(artista => artista.publicId);
 
         if (allArtistas == [] || paginatedArtistas == []) {
