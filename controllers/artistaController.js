@@ -2,27 +2,49 @@ var mongoose = require('mongoose');
 const { getAvailableLetters } = require('../helpers/getAvailableLetters');
 const Artista = require('../models/artista');
 
+const getAllIds = async(req, res, isInternalCall = false) => {
+    try {
+        const artistas = await Artista.find();
+
+        if (artistas == []) {
+            if(isInternalCall) return [];
+
+            res.status(204).send({ msg: 'Nenhum ID encontrado.' })
+        } else {
+            let publicIds = artistas.map(artista => artista.publicId);
+
+            if(isInternalCall) return publicIds;
+            
+            res.status(200).send({
+                ids: publicIds,
+            });
+            
+        }
+
+    } catch (err) {
+        console.error(`Houve um erro ao buscar artista: ${err}`)
+        res.status(500).send({ msg: err });
+    }
+}
+
 const findArtista = async (req, res) => {
     let artistaId = Number(req.params.id);
 
     try {
         let artista = await Artista.findOne({ publicId: artistaId });
 
-        const [nextArtist] = await Artista
-            .find({ publicId: { $gt: artistaId } })
-            .sort({ name: 1 })
-            .limit(1);
-        const [previousArtist] = await Artista
-            .find({ publicId: { $lt: artistaId } })
-            .sort({ name: -1 })
-            .limit(1);
+        const ids = await getAllIds({}, {}, isInternalCall);
+        const currentIdIndex = ids.findIndex(artista.publicId);
+
+        const previous = ids[currentIdIndex - 1];
+        const next = ids[currentindex + 1];
 
         if (artista) {
             res.status(200).send({
                 artista,
                 navigation: {
-                    previous: previousArtist ? previousArtist.publicId : 1,
-                    next: nextArtist ? nextArtist.publicId : artistaId + 2,
+                    previous,
+                    next,
                 }
             });
         } else {
@@ -135,5 +157,6 @@ module.exports = {
     findArtista,
     addArtista,
     editArtista,
-    deleteArtista
+    deleteArtista,
+    getAllIds
 }

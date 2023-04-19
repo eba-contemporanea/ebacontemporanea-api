@@ -4,7 +4,8 @@ const {
     findArtista, 
     editArtista, 
     deleteArtista,
-    getArtists
+    getArtists,
+    getAllIds
 } = require('../controllers/artistaController');
 
 const router = express.Router();
@@ -12,6 +13,8 @@ const router = express.Router();
 router.get('/', getArtists);
 
 router.get('/:id', findArtista);
+
+router.get('/allids', getAllIds);
 
 router.post('/new', addArtista);
 
