@@ -1,29 +1,24 @@
 var mongoose = require('mongoose');
-const { getAvailableLetters } = require('../helpers/getAvailableLetters');
+const { getAvailableLetters, getStudyTypes } = require('../helpers');
 const Artista = require('../models/artista');
 
-const getAllIds = async(req, res, isInternalCall = false) => {
+const getAllIds = async () => {
     try {
-        const artistas = await Artista.find();
+        const artistas = await Artista.find()
+            .sort({ nome: 1 })
+            .collation({ locale: "pt" })
+            .exec();
 
         if (artistas == []) {
-            if(isInternalCall) return [];
-
-            res.status(204).send({ msg: 'Nenhum ID encontrado.' })
+            return [];
         } else {
             let publicIds = artistas.map(artista => artista.publicId);
-
-            if(isInternalCall) return publicIds;
-            
-            res.status(200).send({
-                ids: publicIds,
-            });
-            
+            return publicIds;
         }
 
     } catch (err) {
-        console.error(`Houve um erro ao buscar artista: ${err}`)
-        res.status(500).send({ msg: err });
+        console.error(`Houve um erro ao buscar IDs: ${err}`);
+
     }
 }
 
@@ -33,11 +28,11 @@ const findArtista = async (req, res) => {
     try {
         let artista = await Artista.findOne({ publicId: artistaId });
 
-        const ids = await getAllIds({}, {}, isInternalCall);
-        const currentIdIndex = ids.findIndex(artista.publicId);
+        const ids = await getAllIds();
+        const currentIdIndex = ids.findIndex(id => id == artista.publicId);
 
         const previous = ids[currentIdIndex - 1];
-        const next = ids[currentindex + 1];
+        const next = ids[currentIdIndex + 1];
 
         if (artista) {
             res.status(200).send({
@@ -69,7 +64,7 @@ const getArtists = async (req, res) => {
             .sort({ nome: 1 })
             .collation({ locale: "pt" })
             .exec();
-            
+
         allPaginatedArtists = await Artista
             .find(searchQuery)
             .sort({ nome: 1 })
@@ -85,7 +80,9 @@ const getArtists = async (req, res) => {
             .exec();
 
         estimatedCount = search !== '' ? allPaginatedArtists.length : await Artista.countDocuments();
-        publicIds = allArtistas.map(artista => artista.publicId);
+        publicIds = await getAllIds();
+
+        const filterTypes = getStudyTypes(allArtistas);
 
         if (allArtistas == [] || paginatedArtistas == []) {
             res.status(204).send({ msg: 'Nenhum artista encontrado.' })
@@ -96,6 +93,7 @@ const getArtists = async (req, res) => {
                 availableLetters: getAvailableLetters(allArtistas),
                 artists: getAll ? allArtistas : paginatedArtistas,
                 allIds: publicIds,
+                filterTypes,
             });
         }
     } catch (err) {
@@ -121,7 +119,7 @@ const addArtista = async (req, res) => {
 const editArtista = async (req, res) => {
     const id = req.params.id;
 
-    if(id != null) {
+    if (id != null) {
         await Artista.findOneAndUpdate(
             { publicId: id },
             { '$set': req.body },
@@ -140,7 +138,7 @@ const editArtista = async (req, res) => {
 const deleteArtista = async (req, res) => {
     const id = req.params.id;
 
-    if(id != null) {
+    if (id != null) {
         await Artista.findOneAndDelete({ publicId: id }).then(response => {
             res.status(200).send({ msg: `Artista ${id} foi deletado com sucesso.` });
         }).catch(err => {
@@ -158,5 +156,4 @@ module.exports = {
     addArtista,
     editArtista,
     deleteArtista,
-    getAllIds
 }
