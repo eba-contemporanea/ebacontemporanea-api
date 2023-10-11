@@ -11,6 +11,7 @@ const pesquisadoresRoute = require('./routes/pesquisadoresRoute');
 const coletivosRoute = require('./routes/coletivosRoute');
 const homepageRoute = require('./routes/homepageRoute');
 const projectRoute = require('./routes/projetoRoute');
+const publicacoesRoute = require('./routes/publicacoesRoute');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -37,6 +38,7 @@ app.use('/pesquisadores', pesquisadoresRoute);
 app.use('/coletivos', coletivosRoute);
 app.use('/homepage', homepageRoute);
 app.use('/projeto', projectRoute);
+app.use('/publicacoes', publicacoesRoute);
 
 app.listen(port, () => {
     console.log(`Server running on ${port}`)
