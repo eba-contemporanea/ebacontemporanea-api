@@ -16,6 +16,10 @@ const schema = new mongoose.Schema({
     galleryImages: [{
         img: String,
         name: String
+    }],
+    headerLinks: [{
+        name: String,
+        link: String,
     }]
 });
 
