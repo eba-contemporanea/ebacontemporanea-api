@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
     _id: ObjectId,
-    date: String,
+    date: Number,
     link: String,
-    title: String
+    name: String
 });
 
 module.exports = mongoose.model('Publicacoes', schema);
