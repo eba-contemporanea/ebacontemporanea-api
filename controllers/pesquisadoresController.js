@@ -5,11 +5,13 @@ const getPesquisadores = async(req, res) => {
     try {
         const pesquisadores = await Pesquisador.find();
 
-        const coordenador = pesquisadores.filter(p => p.cargo == 'Coordenador');
-        const bolsistasAtuais = pesquisadores.filter(p => p.cargo == 'Bolsista Atual');
-        const bolsistasAnteriores = pesquisadores.filter(p => p.cargo == 'Bolsista Anterior');
-        const voluntarios = pesquisadores.filter(p => p.cargo == 'Voluntário');
-        const participacoes = pesquisadores.filter(p => p.cargo == "Participação");
+        const ordenarPorNome = (arr) => arr.sort((a, b) => a.nome.localeCompare(b.nome));
+
+        const coordenador = ordenarPorNome(pesquisadores.filter(p => p.cargo == 'Coordenador'));
+        const bolsistasAtuais = ordenarPorNome(pesquisadores.filter(p => p.cargo == 'Bolsista Atual'));
+        const bolsistasAnteriores = ordenarPorNome(pesquisadores.filter(p => p.cargo == 'Bolsista Anterior'));
+        const voluntarios = ordenarPorNome(pesquisadores.filter(p => p.cargo == 'Voluntário'));
+        const participacoes = ordenarPorNome(pesquisadores.filter(p => p.cargo == "Participação"));
 
         const orderedPesquisadores = {
             coordenador,
